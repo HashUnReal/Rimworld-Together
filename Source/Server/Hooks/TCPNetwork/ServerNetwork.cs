@@ -25,6 +25,7 @@ namespace RTServer.Hooks.TCPNetwork
         {
             try
             {
+                PM_Synchronous.ClearSessionFor(client);
                 Network.ServerClients.Remove(client, out _);
                 InformationDisplayer.DisplayDisconnect(client);
                 if (Master.ChatConfig.DisconnectNotifications) PM_Chat.BroadcastServerNotification($"{client.GetData<FL_Player>().Username} has left the server!");
@@ -85,6 +86,8 @@ namespace RTServer.Hooks.TCPNetwork
         }
 
         public static ServerClient GetClientFromID(byte id) { return Network.ServerClients.Keys.First(fetch => fetch.ID == id); }
+
+        public static ServerClient TryGetClientFromID(byte id) { return Network.ServerClients.Keys.FirstOrDefault(fetch => fetch.ID == id); }
 
         public static void SendPacketToAllClients(PacketHeader header, object obj, ServerClient toExclude = null)
         {

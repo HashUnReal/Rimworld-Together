@@ -31,5 +31,7 @@ namespace RTServer.Files
         public bool EnableServerBrowser { get; set; } = true;
 
         public bool EnableServerTelemetry { get; set; } = true;
+
+        public bool EnableSynchronousCompatibilityMode { get; set; } = true;
     }
 }
